@@ -34,6 +34,7 @@ const connect = async () => {
     }
 }
 connect();
+
 // cloudinary configuration 
 cloudinary.config({
     cloud_name: 'dz5i819gv',
@@ -44,6 +45,8 @@ cloudinary.config({
 app.use(fileupload({
     useTempFiles: true
 }))
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.get('/getvideo', async (req, res) => {
     Addvideo.find().then(productdata => res.json(productdata))
