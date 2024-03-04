@@ -11,17 +11,9 @@ const multer = require('multer');
 
 // cors code 
 var cors = require('cors')
-app.use(cors())
-var whitelist = ['http://localhost:5173']
-var corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
+app.use(cors({
+    origin: "http://localhost:5173"
+}))
 
 // mongo connection..........................
 const connect = async () => {
