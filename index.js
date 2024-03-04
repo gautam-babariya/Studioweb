@@ -40,12 +40,12 @@ app.use(fileupload({
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-app.get('/getvideo', async (req, res) => {
+app.get('/getvideo',cors(), async (req, res) => {
     Addvideo.find().then(productdata => res.json(productdata))
         .catch(err => console.log(err))
 })
 
-app.post('/addvideo',async (req, res) => {
+app.post('/addvideo',cors(),async (req, res) => {
     try {
         const uniquePublicId = `video_${Date.now()}`;
         var video;
