@@ -1,4 +1,5 @@
-"version": 2,
+{
+    "version": 2,
 "name": "food-app",
 "builds": [
     { "src": "index.js", "use": "@vercel/node"}
