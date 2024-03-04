@@ -15,6 +15,24 @@ app.use(cors({
     origin: "http://localhost:5173"
 }))
 
+response.headers.set('Access-Control-Allow-Origin', 'http://localhost:5173');
+ 
+const headers = {
+  'Access-Control-Allow-Credentials': true,
+};
+ 
+const options = {
+  headers: [
+    {
+      key: 'Access-Control-Max-Age',
+      value: 600,
+    },
+  ],
+};
+ 
+const header = new Headers();
+header.append('Access-Control-Allow-Methods', 'POST');
+
 // mongo connection..........................
 const connect = async () => {
     try {
