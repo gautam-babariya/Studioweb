@@ -17,7 +17,9 @@
         "source": "/api/(.*)",
         "headers": [
           { "key": "Access-Control-Allow-Origin", "value": "*" },
-          { "key": "Cache-Control", "value": "s-maxage=1, stale-while-revalidate" }
+          { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS, PUT, PATCH, DELETE" },
+          { "key": "Access-Control-Allow-Headers", "value": "Origin, X-Requested-With, Content-Type, Accept, Authorization" },
+          { "key": "Access-Control-Allow-Credentials", "value": "true" }
         ]
       }
     ]
