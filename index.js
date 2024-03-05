@@ -81,8 +81,7 @@ app.post('/addvideo',async (req, res) => {
         res.status(201).json(1);
     } catch (error) {
         console.error(error);
-        // res.status(500).send('Internal Server Error');
-        res.send("ok");
+        res.status(500).send('Internal Servers Error');
     }
 });
 
