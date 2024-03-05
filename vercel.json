@@ -1,10 +1,25 @@
 {
     "version": 2,
-"name": "food-app",
-"builds": [
-    { "src": "index.js", "use": "@vercel/node"}
-],
-"routes": [
-    { "src": "/(.*)", "dest": "/index.js"}
-]
-}
+    "builds": [
+      {
+        "src": "src/index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "src/index.js"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/api/(.*)",
+        "headers": [
+          { "key": "Access-Control-Allow-Origin", "value": "*" },
+          { "key": "Cache-Control", "value": "s-maxage=1, stale-while-revalidate" }
+        ]
+      }
+    ]
+  }
+  

@@ -4,7 +4,6 @@ const port = 5500;
 const Addvideo = require('./model/addvideo');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-app.use(bodyParser.json());
 const fileupload = require('express-fileupload')
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
