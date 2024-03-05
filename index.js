@@ -10,7 +10,8 @@ const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 
 // cors code 
-var cors = require('cors')
+var cors = require('cors');
+const addvideo = require("./model/addvideo");
 app.use(cors())
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -71,7 +72,7 @@ app.post('/addvideo',async (req, res) => {
         const title = req.body.title;
         const type = req.body.type;
         const description = req.body.description;
-        const addvideo = new Addvideo({
+        var addvideo = new Addvideo({
             type,
             video,
             title,
@@ -81,6 +82,7 @@ app.post('/addvideo',async (req, res) => {
         res.status(201).json(1);
     } catch (error) {
         console.error(error);
+        console.log(addvideo);
         res.status(500).send('Internal Servers Error');
     }
 });
