@@ -8,10 +8,10 @@ app.use(bodyParser.json());
 const fileupload = require('express-fileupload')
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
+const addvideo = require("./model/addvideo");
 
 // cors code 
 var cors = require('cors');
-const addvideo = require("./model/addvideo");
 app.use(cors())
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -44,9 +44,6 @@ cloudinary.config({
 app.use(fileupload({
     useTempFiles: true
 }))
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
-
 app.get('/getvideo', async (req, res) => {
     Addvideo.find().then(productdata => res.json(productdata))
         .catch(err => console.log(err))
@@ -59,15 +56,14 @@ app.post('/addvideo',async (req, res) => {
     try {
         const uniquePublicId = `video_${Date.now()}`;
         var video;
-    //   await  cloudinary.uploader.upload(req.files.video.tempFilePath,
-    //     { resource_type: "video",
-    //       public_id: uniquePublicId
-    //     }).then((data) => {
-    //         video = data.secure_url;
-    //         console.log(data.secure_url);
-    //     }).catch((err) => {
-    //       console.log(err)
-    //     });
+      await  cloudinary.uploader.upload(req.files.video.tempFilePath,
+        { resource_type: "video",
+          public_id: uniquePublicId
+        }).then((data) => {
+            video = data.secure_url;
+        }).catch((err) => {
+          console.log(err)
+        });
 
         const title = req.body.title;
         const type = req.body.type;
@@ -78,11 +74,10 @@ app.post('/addvideo',async (req, res) => {
             title,
             description,
         });
-        // await addvideo.save();
+        await addvideo.save();
         res.status(201).json(1);
     } catch (error) {
         console.error(error);
-        console.log(addvideo);
         res.status(500).send('Internal Servers Error');
     }
 });
