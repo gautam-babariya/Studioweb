@@ -18,8 +18,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Body parser configuration
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 
 // mongo connection..........................
@@ -42,8 +42,19 @@ cloudinary.config({
 });
 
 app.use(fileupload({
-    useTempFiles: true
-}))
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+}));
+
+// Set CORS headers for all responses
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
 app.get('/getvideo', async (req, res) => {
     Addvideo.find().then(productdata => res.json(productdata))
         .catch(err => console.log(err))
