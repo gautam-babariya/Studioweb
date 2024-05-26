@@ -10,7 +10,7 @@ const cors = require('cors');
 
 // CORS configuration
 const corsOptions = {
-    origin: 'https://filmmaker-app.vercel.app', // Your frontend's URL
+    origin:  ['https://filmmaker-app.vercel.app', 'http://localhost:5173'], // Your frontend's URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
