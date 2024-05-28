@@ -12,99 +12,77 @@ const path = require('path');
 const cors = require('cors');
 
 // cors code 
-// app.use(cors())
-//   app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-//     res.setHeader('Access-Control-Max-Age', 2592000);
-//     next();
-// });
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
+  app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    res.setHeader('Access-Control-Max-Age', 2592000);
+    next();
+});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
  
 
 // mongo connection..........................
-// const connect = async () => {
-//     try {
-//         const database = await mongoose.connect('mongodb+srv://gosaikaran:karangosai123@cluster0.gwppsu5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/webpage')
-//         console.log("mongo conneted!");
-//     } catch (error) {
-//         console.log("error mongo" + error);
-//     }
-// }
-// connect();
+const connect = async () => {
+    try {
+        const database = await mongoose.connect('mongodb+srv://gosaikaran:karangosai123@cluster0.gwppsu5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/webpage')
+        console.log("mongo conneted!");
+    } catch (error) {
+        console.log("error mongo" + error);
+    }
+}
+connect();
 
 // cloudinary configuration 
-// cloudinary.config({
-//     cloud_name: 'dz5i819gv',
-//     api_key: '259874827789269',
-//     api_secret: 'WzTgb3gojP-ITl1T5-pU_Fa-tzc'
-// });
+cloudinary.config({
+    cloud_name: 'dz5i819gv',
+    api_key: '259874827789269',
+    api_secret: 'WzTgb3gojP-ITl1T5-pU_Fa-tzc'
+});
 
 
-// app.use(fileupload({
-    //     useTempFiles: true
-    // }))
-    // app.get('/getvideo', async (req, res) => {
-        //     Addvideo.find().then(productdata => res.json(productdata))
-//         .catch(err => console.log(err))
-// })
+app.use(fileupload({
+        useTempFiles: true
+    }))
+    app.get('/getvideo', async (req, res) => {
+            Addvideo.find().then(productdata => res.json(productdata))
+        .catch(err => console.log(err))
+})
 app.get('/', async (req, res) => {
     res.send("done");
 })
 
-// app.post('/addvideo',async (req, res) => {
-//     try {
-    //         const uniquePublicId = `video_${Date.now()}`;
-    //         var video;
-    //       await  cloudinary.uploader.upload(req.files.video.tempFilePath,
-    //         { resource_type: "video",
-    //           public_id: uniquePublicId
-    //         }).then((data) => {
-        //             video = data.secure_url;
-        //         }).catch((err) => {
-            //           console.log(err)
-            //         });
+app.post('/addvideo',async (req, res) => {
+    try {
+            const uniquePublicId = `video_${Date.now()}`;
+            var video;
+          await  cloudinary.uploader.upload(req.files.video.tempFilePath,
+            { resource_type: "video",
+              public_id: uniquePublicId
+            }).then((data) => {
+                    video = data.secure_url;
+                }).catch((err) => {
+                      console.log(err)
+                    });
             
-            //         const title = req.body.title;
-            //         const type = req.body.type;
-            //         const description = req.body.description;
-            //         var addvideo = new Addvideo({
-                //             type,
-//             video,
-//             title,
-//             description,
-//         });
-//         await addvideo.save();
-//         res.status(201).json(1);
-//     } catch (error) {
-    //         console.error(error);
-//         res.status(500).send('Internal Servers Error');
-//     }
-// });
-
-//my cloud and my code
-cloudinary.config({
-    cloud_name: 'delde3vvw',
-    api_key: '677662562595255',
-    api_secret: 'OtKmdP9jhhYIXObdsuUmVbDCuV4'
+                    const title = req.body.title;
+                    const type = req.body.type;
+                    const description = req.body.description;
+                    var addvideo = new Addvideo({
+                            type,
+            video,
+            title,
+            description,
+        });
+        await addvideo.save();
+        res.status(201).json(1);
+    } catch (error) {
+            console.error(error);
+        res.status(500).send('Internal Servers Error');
+    }
 });
-app.use(cors());
-app.use(express.json());
-const upload = multer({ dest: 'uploads/' });
-// app.post('/upload', upload.single('image'), async (req, res) => {
-//     try {
-//         const result = await cloudinary.uploader.upload(req.file.path);
-//         url = result.secure_url,
-//             public_id = result.public_id,
-//             console.log(url);
-//         console.log(public_id);
-//         res.json("done he bhai");
-//     } catch (err) {
-//         res.status(500).send(err);
-//     }
-// });
 
 // listening port..........................
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
