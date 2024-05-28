@@ -12,15 +12,15 @@ const path = require('path');
 const cors = require('cors');
 
 // cors code 
-app.use(cors())
-  app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-    res.setHeader('Access-Control-Max-Age', 2592000);
-    next();
-});
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cors())
+//   app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+//     res.setHeader('Access-Control-Max-Age', 2592000);
+//     next();
+// });
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
  
 
@@ -90,7 +90,8 @@ cloudinary.config({
     api_key: '677662562595255',
     api_secret: 'OtKmdP9jhhYIXObdsuUmVbDCuV4'
 });
-// app.use(express.json());
+app.use(cors());
+app.use(express.json());
 // const upload = multer({ dest: 'uploads/' });
 // app.post('/upload', upload.single('image'), async (req, res) => {
 //     try {
