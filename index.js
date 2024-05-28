@@ -92,7 +92,7 @@ cloudinary.config({
 });
 app.use(cors());
 app.use(express.json());
-// const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'uploads/' });
 // app.post('/upload', upload.single('image'), async (req, res) => {
 //     try {
 //         const result = await cloudinary.uploader.upload(req.file.path);
