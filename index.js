@@ -143,9 +143,9 @@ const upload = multer({ dest: 'uploads/' });
 //   console.error('Error connecting to MongoDB:', err);
 // });
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-  });
+app.get('/', async (req, res) => {
+   res.send("done");
+})
 // API endpoint for image uploads
 app.post('/upload', upload.single('image'), async (req, res) => {
     try {
