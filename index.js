@@ -56,20 +56,10 @@ app.get('/', async (req, res) => {
 
 app.post('/addvideo',async (req, res) => {
     try {
-            const uniquePublicId = `video_${Date.now()}`;
-            var video;
-          await  cloudinary.uploader.upload(req.files.video.tempFilePath,
-            { resource_type: "video",
-              public_id: uniquePublicId
-            }).then((data) => {
-                    video = data.secure_url;
-                }).catch((err) => {
-                      console.log(err)
-                    });
-            
                     const title = req.body.title;
                     const type = req.body.type;
                     const description = req.body.description;
+                    const video = req.body.video;
                     var addvideo = new Addvideo({
                             type,
             video,
