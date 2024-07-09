@@ -61,7 +61,6 @@ app.post('/addvideo',async (req, res) => {
                     const description = req.body.description;
                     const video = req.body.video;
                     const poster = req.body.poster;
-                    console.log("this",video);
                     var addvideo = new Addvideo({
                             type,
             video,
