@@ -47,7 +47,7 @@ app.use(fileupload({
         useTempFiles: true
     }))
     app.get('/getvideo', async (req, res) => {
-            Addvideo.find().then(productdata => res.json(productdata))
+            Addvideo.find().then(productdata => res.json(productdata.reverse()))
         .catch(err => console.log(err))
 })
 app.get('/', async (req, res) => {
